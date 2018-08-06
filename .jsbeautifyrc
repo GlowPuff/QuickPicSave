@@ -1,0 +1,4 @@
+{
+    "space_in_paren": true,
+    "brace_style":"expand,preserve-inline"
+}
