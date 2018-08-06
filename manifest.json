@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Quick Pic Save",
-    "version": "1.0",
+    "version": "0.1.0",
 
     "description": "Quickly save images from the web using a popup Save button.",
     "homepage_url": "http://glowpuff.com",
