@@ -2,7 +2,10 @@ $( document ).ready( () =>
 {
     Initialize();
 
-    function onSet( item ) { console.log( "SAVED FOLDER OPTIONS::" + item.savePath ); }
+    function onSet( item )
+    {
+        // console.log("SAVED FOLDER OPTIONS::" + item.savePath);
+    }
 
     function onError() {}
 

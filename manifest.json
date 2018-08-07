@@ -33,7 +33,7 @@
 
     "background":
     {
-        "scripts": [ "content_scripts/background.js" ]
+        "scripts": [ "background/background.js" ]
     },
 
     "permissions": [
