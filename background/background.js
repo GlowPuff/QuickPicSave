@@ -5,7 +5,6 @@ browser.runtime.onMessage.addListener(
         {
             //console.log( 'Started downloading ID: ' + id );
 
-
             function onFailed( error )
             {
                 console.log( "Download failed: " + error );
