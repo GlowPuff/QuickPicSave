@@ -4,18 +4,21 @@ $( document ).ready( function()
     var pluginEnabled = true;
     var fileSavePath = "";
     var minWidth = 250;
+    var hoverPos = 0;
 
     let gettingItem = browser.storage.local.get(
     {
         enabled: true,
         savePath: "",
-        minSize: 250
+        minSize: 250,
+        hoverPos: 0
     } );
     gettingItem.then( ( item ) =>
     {
         pluginEnabled = item.enabled;
         fileSavePath = item.savePath;
         minWidth = item.minSize;
+        hoverPos = item.hoverPos;
         Initialize();
     } );
 
@@ -57,6 +60,15 @@ $( document ).ready( function()
                 pluginEnabled = false;
                 $( "#gpQuickSaveButton" ).hide();
             }
+            if ( item == "hoverPos" )
+            {
+                hoverPos = changes[ item ].newValue;
+                $( "#gpQuickSaveButton" ).removeClass( "gpSaveButtonFixed" ).removeClass( "gpSaveButton" );
+                if ( changes[ item ].newValue == 0 )
+                    $( "#gpQuickSaveButton" ).addClass( "gpSaveButtonFixed" );
+                else
+                    $( "#gpQuickSaveButton" ).addClass( "gpSaveButton" ).css( { top: 0, left: 0 } );
+            }
         }
     }
 
@@ -69,25 +81,61 @@ $( document ).ready( function()
                 var imageURL = $( this ).attr( "src" );
 
                 // $( this ).addClass( "gpImage" );
-
+                var saveButtonClass = hoverPos == 0 ? "gpSaveButtonFixed" : "gpSaveButton";
                 //create the popup button
-                var qsButton = $( "<input id='gpQuickSaveButton' type = 'image' class= 'gpSaveButton' src = '" + icon + "' ></>" ).hide();
-
-                //Determine if parent is a DIV, and use that to overlay popup button
+                var qsButton = $( "<input id='gpQuickSaveButton' type ='image' class='" + saveButtonClass + "' src ='" + icon + "' ></>" ).hide();
+                var img = $( this );
+                //Determine if parent is a DIV or A, and use that to overlay popup button
                 //Otherwise, create new DIV and wrap it around IMG
-                if ( $( this ).parent().is( "div" ) )
+                if ( $( this ).parent().is( "div" ) || $( this ).parent().is( "a" ) )
                 {
                     $( this ).parent().addClass( "gpImgBorder" )
-                        .on( "mouseenter", function( event ) { if ( pluginEnabled && $( this ).width() >= minWidth ) qsButton.show(); } )
-                        .on( "mouseleave", function( event ) { if ( pluginEnabled ) qsButton.hide(); } );
+                        .on( "mouseenter", function( event )
+                        {
+                            if ( pluginEnabled && $( this ).width() >= minWidth )
+                            {
+                                // qsButton.show();
+                                img.addClass( "gpOutline" );
+                                if ( hoverPos == 0 )
+                                    qsButton.css( { top: event.clientY, left: event.clientX } ).show();
+                                else
+                                    qsButton.show();
+                            }
+                        } )
+                        .on( "mouseleave", function( event )
+                        {
+                            if ( pluginEnabled )
+                            {
+                                qsButton.hide();
+                                img.removeClass( "gpOutline" );
+                            }
+                        } );
 
                 }
                 else
                 {
                     //create the div that will surround the image on the page
-                    var newBox = $( "<div id='gpImageBorder' class='gpImgBorder'></div>" )
-                        .on( "mouseenter", function( event ) { if ( pluginEnabled && $( this ).width() >= minWidth ) qsButton.show(); } )
-                        .on( "mouseleave", function( event ) { if ( pluginEnabled ) qsButton.hide(); } );
+                    var newBox = $( "<div id='gpImgBorder' class='gpImgBorder'></div>" )
+                        .on( "mouseenter", function( event )
+                        {
+                            if ( pluginEnabled && $( this ).width() >= minWidth )
+                            {
+                                // qsButton.show();
+                                img.addClass( "gpOutline" );
+                                if ( hoverPos == 0 )
+                                    qsButton.css( { top: event.clientY, left: event.clientX } ).show();
+                                else
+                                    qsButton.show();
+                            }
+                        } )
+                        .on( "mouseleave", function( event )
+                        {
+                            if ( pluginEnabled )
+                            {
+                                qsButton.hide();
+                                img.removeClass( "gpOutline" );
+                            }
+                        } );
                     //wrap the newBox DIV around the image we're working on
                     $( this ).wrap( newBox );
                 }

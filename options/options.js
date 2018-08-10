@@ -1,5 +1,7 @@
 $( document ).ready( () =>
 {
+    var oldMinValue;
+
     Initialize();
 
     function onSet( item )
@@ -11,11 +13,13 @@ $( document ).ready( () =>
 
     function Initialize()
     {
+        //load settings, set defaults if necessary
         let gettingItem = browser.storage.local.get(
         {
             enabled: true,
             savePath: "",
-            minSize: 250
+            minSize: 250,
+            hoverPos: 0 //default 0 = mouse position, 1 = top left
         } );
         gettingItem.then( ( item ) =>
         {
@@ -23,12 +27,38 @@ $( document ).ready( () =>
             $( "#enabledStatus" ).text( item.enabled );
             $( "#savePath" ).val( item.savePath );
             $( "#minWidth" ).val( item.minSize );
+            if ( item.hoverPos == 0 )
+                $( "#hoverPos" ).prop( "checked", true );
+            else
+                $( "#topLeft" ).prop( "checked", true );
+            oldMinValue = $( "#minWidth" ).val();
         }, ( error ) => { console.log( "Initialize()::ERROR::" + error ); } );
     }
 
     $( "#saveButton" ).click( ( eventObject ) =>
     {
-        var minWidth = $( "#minWidth" ).val().trim();
+        SaveChanges();
+    } );
+
+    //save changes when radio button clicked
+    $( "#hoverPos, #topLeft" ).on( "click", () =>
+    {
+        SaveChanges();
+    } );
+
+    // $( "#minWidth, #savePath" ).on( "input", () =>
+    // {
+    //     $( "#saveButton" ).trigger( "click" );
+    // } );
+
+    function SaveChanges()
+    {
+        //make sure min width value is a number
+        if ( $.isNumeric( $( "#minWidth" ).val() ) )
+            var minWidth = $( "#minWidth" ).val().trim();
+        else
+            var minWidth = oldMinValue;
+
         var savepath = $( "#savePath" ).val().trim(); //.replace( "\\", "" );
         if ( savepath == "\\" )
             savepath = "";
@@ -38,10 +68,18 @@ $( document ).ready( () =>
         if ( savepath != "" && savepath[ savepath.length ] != '\\' )
             savepath = savepath + "\\";
         //console.log( "SAVING FOLDER::" + savepath );
+        //get which radio button is checked
+        var popSelection = $( "#hoverPos" ).prop( "checked" ) ? 0 : 1;
+        console.log( popSelection );
 
-        browser.storage.local.set( { savePath: savepath, minSize: minWidth } )
+        browser.storage.local.set(
+            {
+                savePath: savepath,
+                minSize: minWidth,
+                hoverPos: popSelection
+            } )
             .then( onSet, onError );
-    } );
+    }
 
     function onStorageChange( changes )
     {

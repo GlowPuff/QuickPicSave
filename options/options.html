@@ -18,10 +18,6 @@
             margin-top: 10px;
         }
 
-        /* label {
-            line-height: 30px
-        } */
-
         .default {
             padding: 5px 15px;
             margin-top: 10px;
@@ -38,15 +34,36 @@
             <label>Minimum Width for Popup to Appear: </label>
             <input type="text" id="minWidth">
             <label> pixels</label>
+            <p><i>Press Enter to confirm new value.</i></p>
         </div>
 
+        <hr/>
+
+        <label><b>Popup Position</b></label>
+        <div class="section">
+            <div style="float:left">
+                <label>Position for Popup to Appear: </label>
+            </div>
+            <div style="float:left; margin-left:10px">
+                <input id="hoverPos" type="radio" name="hoverpos" /><label for="hoverPos">Mouse Hover Position</label>
+                <br/>
+                <input id="topLeft" type="radio" name="hoverpos" /><label for="topLeft">Top Left</label>
+            </div>
+            <div style="clear:both"></div>
+            <p>
+                <i>Open tabs might need to be reloaded to see the change.</i>
+            </p>
+        </div>
         <hr/>
 
         <label><b>Save Location</b></label>
         <div class="section">
             <label>SubFolder Relative to Download Folder: </label>
             <input type="text" id="savePath">
-            <br/>
+            <p>
+                <i>Press Enter to confirm new value.</i>
+            </p>
+
             <p>
                 <label><i>Images can be saved to a subfolder under your default download folder. If the folder doesn't already exist, it will be automatically created the first time you save an image.</i></label>
             </p>

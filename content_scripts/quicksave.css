@@ -1,6 +1,10 @@
 .gpImgBorder {
-    /*border: 1px solid red;*/
+    /* border: 1px solid red; */
     position: relative;
+}
+
+.gpOutline {
+    border: 1px solid red;
 }
 
 .gpSaveButton {
@@ -17,19 +21,23 @@
     border: 1px solid white;
 }
 
-.gpDummy {
-    position: absolute;
-    /* background-color: #3e4e5f; */
-    float: left;
+.gpSaveButtonFixed {
+    position: fixed;
+    background-color: #3e4e5f;
+    width: 36px;
+    height: 36px;
+    /* float: left; */
     left: 0px;
     top: 0px;
     z-index: 1000;
     border: none;
-    /* border: 1px solid white; */
+    /*margin: 5px;*/
+    border: 1px solid white;
 }
 
-.gpImage {
-    /*width: 100%;*/
-    height: auto;
-    margin: 0;
+/* .gpImage {
+border: 1px solid red;
+height: auto;
+margin: 0;
 }
+*/
