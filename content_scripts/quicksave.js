@@ -26,7 +26,7 @@ $( document ).ready( function()
 
     function handleError( error )
     {
-        console.log( `handleError: ${error}` );
+        console.log( `Quick Pic Save Error: ${error}` );
     }
 
     function onStorageChange( changes, area )
