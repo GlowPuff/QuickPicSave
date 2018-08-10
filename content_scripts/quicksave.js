@@ -114,9 +114,9 @@ $( document ).ready( function()
                         if ( eventObject.data.url.trim().substr( 0, 7 ) != "http://" && eventObject.data.url.trim().substr( 0, 8 ) != "https://" )
                             imageURL = currentURL + imageURL; //relative URL, so precede it by the current HTTP location
 
-                        console.log( "fileSavePath::" + fileSavePath );
-                        console.log( "FILENAME::" + fname );
-                        console.log( "IMG URL::" + imageURL );
+                        // console.log( "fileSavePath::" + fileSavePath );
+                        // console.log( "FILENAME::" + fname );
+                        // console.log( "IMG URL::" + imageURL );
                         eventObject.preventDefault();
                         var sending = browser.runtime.sendMessage( { url: imageURL, filename: fname } );
                         sending.then( handleResponse, handleError );
