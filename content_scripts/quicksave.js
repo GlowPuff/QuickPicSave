@@ -21,7 +21,7 @@ $( document ).ready( function()
 
     function handleResponse( message )
     {
-        console.log( `handleResponse:  ${message.response}` );
+        // console.log( `handleResponse:  ${message.response}` );
     }
 
     function handleError( error )
@@ -38,22 +38,22 @@ $( document ).ready( function()
             if ( item == "minSize" )
             {
                 minWidth = changes[ item ].newValue;
-                console.log( "MINWIDTH::" + minWidth );
+                // console.log( "MINWIDTH::" + minWidth );
             }
             if ( item == "savePath" )
             {
                 fileSavePath = changes[ item ].newValue;
-                console.log( "NEW FILE PATH::" + fileSavePath );
+                // console.log( "NEW FILE PATH::" + fileSavePath );
             }
             if ( item == "enabled" && changes[ item ].newValue )
             {
-                console.log( "ENABLED" );
+                // console.log( "ENABLED" );
                 pluginEnabled = true;
                 $( "#gpQuickSaveButton" ).show();
             }
             else if ( item == "enabled" && !changes[ item ].newValue )
             {
-                console.log( "DISABLED" );
+                // console.log( "DISABLED" );
                 pluginEnabled = false;
                 $( "#gpQuickSaveButton" ).hide();
             }
