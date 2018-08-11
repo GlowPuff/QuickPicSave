@@ -33,7 +33,7 @@ $( document ).ready( () =>
     $( "#gpCheckBox" ).click( ( eventObject ) =>
     {
         var checkState = $( "#gpCheckBox" ).prop( "checked" );
-        browser.storage.local.set( { enabled: checkState } )
-            .then( () => { console.log( 'SAVED CHECK STATE::' + checkState ); }, ( error ) => { console.log( error ) } );
+        browser.storage.local.set( { enabled: checkState } );
+        // .then( () => { console.log( 'SAVED CHECK STATE::' + checkState ); }, ( error ) => { console.log( error ) } );
     } );
 } );

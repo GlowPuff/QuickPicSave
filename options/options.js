@@ -19,18 +19,21 @@ $( document ).ready( () =>
             enabled: true,
             savePath: "",
             minSize: 250,
-            hoverPos: 0 //default 0 = mouse position, 1 = top left
+            hoverPos: 0, //default 0 = mouse position, 1 = top left
+            drawBox: false
         } );
         gettingItem.then( ( item ) =>
         {
             //console.log( "Initialize()::OPTIONS::GOT STORAGE ITEM" );
-            $( "#enabledStatus" ).text( item.enabled );
+            $( "#enabledStatus" ).text( item.enabled ? "Yes" : "No" );
             $( "#savePath" ).val( item.savePath );
             $( "#minWidth" ).val( item.minSize );
             if ( item.hoverPos == 0 )
                 $( "#hoverPos" ).prop( "checked", true );
             else
                 $( "#topLeft" ).prop( "checked", true );
+            $( "#drawBox" ).prop( "checked", item.drawBox );
+            $( "#drawBoxIndicator" ).text( item.drawBox ? "On" : "Off" );
             oldMinValue = $( "#minWidth" ).val();
         }, ( error ) => { console.log( "Initialize()::ERROR::" + error ); } );
     }
@@ -41,15 +44,11 @@ $( document ).ready( () =>
     } );
 
     //save changes when radio button clicked
-    $( "#hoverPos, #topLeft" ).on( "click", () =>
+    $( "#hoverPos, #topLeft, #drawBox" ).on( "click", () =>
     {
         SaveChanges();
+        $( "#drawBoxIndicator" ).text( $( "#drawBox" ).prop( "checked" ) ? "On" : "Off" );
     } );
-
-    // $( "#minWidth, #savePath" ).on( "input", () =>
-    // {
-    //     $( "#saveButton" ).trigger( "click" );
-    // } );
 
     function SaveChanges()
     {
@@ -70,13 +69,16 @@ $( document ).ready( () =>
         //console.log( "SAVING FOLDER::" + savepath );
         //get which radio button is checked
         var popSelection = $( "#hoverPos" ).prop( "checked" ) ? 0 : 1;
-        console.log( popSelection );
+        //console.log( popSelection );
+        var boxSelection = $( "#drawBox" ).prop( "checked" );
+        // console.log( boxSelection );
 
         browser.storage.local.set(
             {
                 savePath: savepath,
                 minSize: minWidth,
-                hoverPos: popSelection
+                hoverPos: popSelection,
+                drawBox: boxSelection
             } )
             .then( onSet, onError );
     }
@@ -88,7 +90,7 @@ $( document ).ready( () =>
         {
             if ( item == "enabled" )
             {
-                $( "#enabledStatus" ).text( changes[ item ].newValue );
+                $( "#enabledStatus" ).text( changes[ item ].newValue ? "Yes" : "No" );
             }
         }
     }

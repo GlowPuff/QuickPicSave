@@ -5,13 +5,15 @@ $( document ).ready( function()
     var fileSavePath = "";
     var minWidth = 250;
     var hoverPos = 0;
+    var drawBox = false;
 
     let gettingItem = browser.storage.local.get(
     {
         enabled: true,
         savePath: "",
         minSize: 250,
-        hoverPos: 0
+        hoverPos: 0,
+        drawBox: false
     } );
     gettingItem.then( ( item ) =>
     {
@@ -19,6 +21,7 @@ $( document ).ready( function()
         fileSavePath = item.savePath;
         minWidth = item.minSize;
         hoverPos = item.hoverPos;
+        draw = item.drawBox;
         Initialize();
     } );
 
@@ -69,6 +72,10 @@ $( document ).ready( function()
                 else
                     $( "#gpQuickSaveButton" ).addClass( "gpSaveButton" ).css( { top: 0, left: 0 } );
             }
+            if ( item == "drawBox" )
+            {
+                drawBox = changes[ item ].newValue;
+            }
         }
     }
 
@@ -95,7 +102,8 @@ $( document ).ready( function()
                             if ( pluginEnabled && $( this ).width() >= minWidth )
                             {
                                 // qsButton.show();
-                                img.addClass( "gpOutline" );
+                                if ( drawBox )
+                                    img.addClass( "gpOutline" );
                                 if ( hoverPos == 0 )
                                     qsButton.css( { top: event.clientY, left: event.clientX } ).show();
                                 else
@@ -121,7 +129,8 @@ $( document ).ready( function()
                             if ( pluginEnabled && $( this ).width() >= minWidth )
                             {
                                 // qsButton.show();
-                                img.addClass( "gpOutline" );
+                                if ( drawBox )
+                                    img.addClass( "gpOutline" );
                                 if ( hoverPos == 0 )
                                     qsButton.css( { top: event.clientY, left: event.clientX } ).show();
                                 else

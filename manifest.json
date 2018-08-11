@@ -16,7 +16,8 @@
 
     "icons":
     {
-        "48": "icons/quicksave-48.png"
+        "48": "icons/quicksave-96.png",
+        "96": "icons/quicksave-96.png"
     },
 
     "content_scripts": [
@@ -44,8 +45,8 @@
     "browser_action":
     {
         "browser_style": false,
-        "default_icon": "icons/download-36.png",
-        "default_title": "QuickSave",
+        "default_icon": "icons/quicksave-48.png",
+        "default_title": "Quick Pic Save",
         "default_popup": "popup/popup.html"
     },
 

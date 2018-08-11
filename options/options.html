@@ -18,6 +18,10 @@
             margin-top: 10px;
         }
 
+        input[type='checkbox'] {
+            transform: scale(1.5);
+        }
+
         .default {
             padding: 5px 15px;
             margin-top: 10px;
@@ -31,7 +35,7 @@
         <hr/>
         <label><b>Minimum Width</b></label>
         <div class="section">
-            <label>Minimum Width for Popup to Appear: </label>
+            <label>Minimum Image Width For Download Button To Appear: </label>
             <input type="text" id="minWidth">
             <label> pixels</label>
             <p><i>Press Enter to confirm new value.</i></p>
@@ -39,10 +43,21 @@
 
         <hr/>
 
+        <label>
+            <b>Visual Indicator</b>
+        </label>
+        <div class="section">
+            <label>Draw Box Around Image To Be Saved: </label>
+            <input id="drawBox" type="checkbox" />
+            <b><label for="drawBox" id="drawBoxIndicator">not set</label></b>
+        </div>
+
+        <hr/>
+
         <label><b>Popup Position</b></label>
         <div class="section">
             <div style="float:left">
-                <label>Position for Popup to Appear: </label>
+                <label>Position For Download Button To Appear: </label>
             </div>
             <div style="float:left; margin-left:10px">
                 <input id="hoverPos" type="radio" name="hoverpos" /><label for="hoverPos">Mouse Hover Position</label>
@@ -58,14 +73,14 @@
 
         <label><b>Save Location</b></label>
         <div class="section">
-            <label>SubFolder Relative to Download Folder: </label>
+            <label>SubFolder Relative To Download Folder: </label>
             <input type="text" id="savePath">
             <p>
                 <i>Press Enter to confirm new value.</i>
             </p>
 
             <p>
-                <label><i>Images can be saved to a subfolder under your default download folder. If the folder doesn't already exist, it will be automatically created the first time you save an image.</i></label>
+                <label><i>Images can be saved to a subfolder under your default download folder. If the folder you specify here doesn't already exist, it will be automatically created the first time you save an image.</i></label>
             </p>
             <p>
                 <label><i>Leave the textbox <b>blank</b> to save to the root of your default download folder.</i></label>
