@@ -8,8 +8,9 @@
 }
 
 .gpSaveButton {
+    /* upper left position setting is float:none and position:fixed */
     position: absolute;
-    background-color: #3e4e5f;
+    background-color: transparent;
     width: 36px;
     height: 36px;
     float: left;
@@ -17,27 +18,11 @@
     top: 0px;
     z-index: 1000;
     border: none;
-    /*margin: 5px;*/
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    border-radius: 10px
 }
 
-.gpSaveButtonFixed {
-    position: fixed;
-    background-color: #3e4e5f;
-    width: 36px;
-    height: 36px;
-    /* float: left; */
-    left: 0px;
-    top: 0px;
-    z-index: 1000;
-    border: none;
-    /*margin: 5px;*/
-    border: 1px solid white;
+.gpButtonDown {
+    background-color: greenyellow;
+    border: 1px solid black;
 }
-
-/* .gpImage {
-border: 1px solid red;
-height: auto;
-margin: 0;
-}
-*/

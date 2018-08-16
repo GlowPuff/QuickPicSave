@@ -21,7 +21,7 @@ $( document ).ready( function()
         fileSavePath = item.savePath;
         minWidth = item.minSize;
         hoverPos = item.hoverPos;
-        draw = item.drawBox;
+        drawBox = item.drawBox;
         Initialize();
     } );
 
@@ -66,11 +66,10 @@ $( document ).ready( function()
             if ( item == "hoverPos" )
             {
                 hoverPos = changes[ item ].newValue;
-                $( "#gpQuickSaveButton" ).removeClass( "gpSaveButtonFixed" ).removeClass( "gpSaveButton" );
                 if ( changes[ item ].newValue == 0 )
-                    $( "#gpQuickSaveButton" ).addClass( "gpSaveButtonFixed" );
+                    $( "#gpQuickSaveButton" ).css( "position", "fixed" ).css( "float", "none" );
                 else
-                    $( "#gpQuickSaveButton" ).addClass( "gpSaveButton" ).css( { top: 0, left: 0 } );
+                    $( "#gpQuickSaveButton" ).css( "position", "absolute" ).css( "float", "left" ).css( { top: 0, left: 0 } );
             }
             if ( item == "drawBox" )
             {
@@ -88,9 +87,15 @@ $( document ).ready( function()
                 var imageURL = $( this ).attr( "src" );
 
                 // $( this ).addClass( "gpImage" );
-                var saveButtonClass = hoverPos == 0 ? "gpSaveButtonFixed" : "gpSaveButton";
                 //create the popup button
-                var qsButton = $( "<input id='gpQuickSaveButton' type ='image' class='" + saveButtonClass + "' src ='" + icon + "' ></>" ).hide();
+                var qsButton = $( "<input id='gpQuickSaveButton' type ='image' class='gpSaveButton' src ='" + icon + "' ></>" ).hide();
+                //style popup button on mouse down and up/leave
+                qsButton.on( "mousedown", () => { qsButton.addClass( "gpButtonDown" ); } ).on( "mouseup mouseleave", () => { qsButton.removeClass( "gpButtonDown" ); } );
+                if ( hoverPos == 0 )
+                    qsButton.css( "position", "fixed" ).css( "float", "none" );
+                else
+                    qsButton.css( "position", "absolute" ).css( "float", "left" );
+
                 var img = $( this );
                 //Determine if parent is a DIV or A, and use that to overlay popup button
                 //Otherwise, create new DIV and wrap it around IMG
