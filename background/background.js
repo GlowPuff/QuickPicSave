@@ -11,15 +11,34 @@ browser.runtime.onMessage.addListener(
             console.log( "Quick Pic Save download failed: " + error );
         }
 
+        function sendMessageToTabs( tabs )
+        {
+            for ( let tab of tabs )
+            {
+                browser.tabs.sendMessage( tab.id, { command: "refresh" } );
+            }
+        }
+
         //sendResponse( { response: "DOWNLOADING IMAGE" } );
 
-        var downloading = browser.downloads.download(
+        if ( request.command == "saveImage" )
         {
-            url: request.url,
-            filename: request.filename,
-            conflictAction: 'uniquify',
-            saveAs: false,
-            incognito: true
-        } );
-        downloading.then( onStartedDownload, onFailed );
+            var downloading = browser.downloads.download(
+            {
+                url: request.url,
+                filename: request.filename,
+                conflictAction: 'uniquify',
+                saveAs: false,
+                incognito: true
+            } );
+            downloading.then( onStartedDownload, onFailed );
+        }
+        else if ( request.command == "refresh" )
+        {
+            browser.tabs.query(
+            {
+                currentWindow: true,
+                active: true
+            } ).then( sendMessageToTabs );
+        }
     } );

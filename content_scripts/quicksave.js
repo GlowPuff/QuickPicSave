@@ -90,7 +90,9 @@ $( document ).ready( function()
                 //create the popup button
                 var qsButton = $( "<input id='gpQuickSaveButton' type ='image' class='gpSaveButton' src ='" + icon + "' ></>" ).hide();
                 //style popup button on mouse down and up/leave
-                qsButton.on( "mousedown", () => { qsButton.addClass( "gpButtonDown" ); } ).on( "mouseup mouseleave", () => { qsButton.removeClass( "gpButtonDown" ); } );
+                qsButton.on( "mousedown", () => { qsButton.addClass( "gpButtonDown" ); } )
+                    .on( "mouseup mouseleave", () => { qsButton.removeClass( "gpButtonDown" ); } );
+
                 if ( hoverPos == 0 )
                     qsButton.css( "position", "fixed" ).css( "float", "none" );
                 else
@@ -180,13 +182,24 @@ $( document ).ready( function()
                         // console.log( "FILENAME::" + fname );
                         // console.log( "IMG URL::" + imageURL );
                         eventObject.preventDefault();
-                        var sending = browser.runtime.sendMessage( { url: imageURL, filename: fname } );
+                        var sending = browser.runtime.sendMessage( { command: "saveImage", url: imageURL, filename: fname } );
                         sending.then( handleResponse, handleError );
                         return false;
                     } );
             }
         } );
     }
+
+    browser.runtime.onMessage.addListener(
+        function( request, sender, sendResponse )
+        {
+            if ( request.command == "refresh" )
+            {
+                // console.log( "refresh" );
+                if ( $( "#gpQuickSaveButton" ).length == 0 )
+                    Initialize();
+            }
+        } );
 
     browser.storage.onChanged.addListener( onStorageChange );
 } );

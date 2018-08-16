@@ -1,6 +1,6 @@
 html,
 body {
-    width: 150px;
+    width: 200px;
 }
 
 .hidden {
@@ -77,12 +77,14 @@ body {
     transform: rotate(45deg);
 }
 
-.button {
+button {
     margin: 3% auto;
-    padding: 4px;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 15px;
     cursor: pointer;
+    padding: 5px 5px;
+    margin-top: 10px;
+    width: 75%;
 }
 
 .reset {
@@ -91,9 +93,4 @@ body {
 
 .reset:hover {
     background-color: #EAEA9D;
-}
-
-#options {
-    padding: 5px 15px;
-    margin-top: 10px;
 }

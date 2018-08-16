@@ -1,27 +1,31 @@
 ﻿<!DOCTYPE html>
 
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="popup.css" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="popup.css" />
 </head>
 
 <body>
-	<div id="popup-content">
-		<label class="container">
+    <div id="popup-content">
+        <label class="container">
 			Enabled
 			<input id="gpCheckBox" type="checkbox" checked="checked">
 			<span class="checkmark"></span>
 		</label>
-		<div>
-			<button id="options">Options...</button>
-		</div>
-	</div>
-	<div id="error-content" class="hidden">
+        <div>
+            <button id="refresh">Refresh Popup</button>
+        </div>
+        <div>
+            <button id="options">Options...</button>
+        </div>
+    </div>
+    <!-- <div id="error-content" class="hidden">
 		<p>Can't show settings.</p><p>Try a different page.</p>
-	</div>
-	<script src="../content_scripts/jquery-3.3.1.min.js"></script>
-	<script src="popup.js"></script>
+	</div> -->
+    <script src="../content_scripts/jquery-3.3.1.min.js"></script>
+    <script src="popup.js"></script>
 </body>
 
 </html>

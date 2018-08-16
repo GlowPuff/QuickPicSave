@@ -30,6 +30,11 @@ $( document ).ready( () =>
         browser.runtime.openOptionsPage();
     } );
 
+    $( "#refresh" ).click( () =>
+    {
+        browser.runtime.sendMessage( { command: "refresh" } );
+    } );
+
     $( "#gpCheckBox" ).click( ( eventObject ) =>
     {
         var checkState = $( "#gpCheckBox" ).prop( "checked" );
