@@ -58,14 +58,12 @@ $( document ).ready( () =>
         else
             var minWidth = oldMinValue;
 
-        var savepath = $( "#savePath" ).val().trim(); //.replace( "\\", "" );
-        if ( savepath == "\\" )
-            savepath = "";
+        var savepath = $( "#savePath" ).val().trim();
         //remove any illegal characters from folder name
         savepath = savepath.replace( /[^a-z0-9]/gi, '_' );
         //remove any trailing backslash \
-        if ( savepath != "" && savepath[ savepath.length ] != '\\' )
-            savepath = savepath + "\\";
+        // if ( savepath != "" && savepath[ savepath.length ] != '\\' )
+        //     savepath = savepath + "\\";
         //console.log( "SAVING FOLDER::" + savepath );
         //get which radio button is checked
         var popSelection = $( "#hoverPos" ).prop( "checked" ) ? 0 : 1;

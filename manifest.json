@@ -10,15 +10,14 @@
     {
         "gecko":
         {
-            "id": "quicksave@glowpuff.com"
+            "id": "quickpicsave@glowpuff.com"
         }
     },
 
-    "icons":
-    {
-        "48": "icons/quicksave-96.png",
-        "96": "icons/quicksave-96.png"
-    },
+    "icons": [
+        { "48": "icons/quicksave-96.png" },
+        { "96": "icons/quicksave-96.png" }
+    ],
 
     "content_scripts": [
     {
