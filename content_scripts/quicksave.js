@@ -121,33 +121,33 @@ function Initialize()
             var img = $( this );
             //Determine if parent is a DIV or A, and use that to overlay popup button
             //Otherwise, create new DIV and wrap it around IMG
-            if ( $( this ).parent().is( "div" ) || $( this ).parent().is( "a" ) )
-            {
-                $( this ).parent().addClass( "gpImgBorder" )
-                    .on( "mouseenter", function( event )
-                    {
-                        if ( pluginEnabled && $( this ).width() >= minWidth )
-                        {
-                            // qsButton.show();
-                            if ( drawBox )
-                                img.addClass( "gpOutline" );
-                            if ( hoverPos == 0 )
-                                qsButton.css( { top: event.clientY, left: event.clientX } ).show();
-                            else
-                                qsButton.show();
-                        }
-                    } )
-                    .on( "mouseleave", function( event )
-                    {
-                        if ( pluginEnabled )
-                        {
-                            qsButton.hide();
-                            img.removeClass( "gpOutline" );
-                        }
-                    } );
+            // if ( $( this ).parent().is( "div" ) || $( this ).parent().is( "a" ) )
+            // {
+            //     $( this ).parent().addClass( "gpImgBorder" )
+            //         .on( "mouseenter", function( event )
+            //         {
+            //             if ( pluginEnabled && $( this ).width() >= minWidth )
+            //             {
+            //                 // qsButton.show();
+            //                 if ( drawBox )
+            //                     img.addClass( "gpOutline" );
+            //                 if ( hoverPos == 0 )
+            //                     qsButton.css( { top: event.clientY, left: event.clientX } ).show();
+            //                 else
+            //                     qsButton.show();
+            //             }
+            //         } )
+            //         .on( "mouseleave", function( event )
+            //         {
+            //             if ( pluginEnabled )
+            //             {
+            //                 qsButton.hide();
+            //                 img.removeClass( "gpOutline" );
+            //             }
+            //         } );
 
-            }
-            else
+            // }
+            // else
             {
                 //create the div that will surround the image on the page
                 var newBox = $( "<div id='gpImgBorder' class='gpImgBorder'></div>" )
