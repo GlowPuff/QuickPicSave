@@ -189,7 +189,7 @@ function Initialize()
 
                     //pull the filename from the image's URL
                     var index = eventObject.data.url.lastIndexOf( "/" ) + 1;
-                    var fname = ( fileSavePath + "\\" + eventObject.data.url.substr( index ) ).trim();
+                    var fname = ( fileSavePath + ( fileSavePath.length == 0 ? "" : "\\" ) + eventObject.data.url.substr( index ) ).trim();
 
                     //fix imageURL to account for relative URLs
                     var currentURL = window.location.href;
