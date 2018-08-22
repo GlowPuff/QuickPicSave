@@ -102,7 +102,7 @@ function Initialize()
 
         if ( this.naturalWidth > minWidth )
         {
-            var imageURL = $( this ).attr( "src" );
+            var imageURL = this.src; //this should grab the absolute URL including http://, even if the src is a relative path
 
             // console.log( imageURL );
 
@@ -118,7 +118,6 @@ function Initialize()
             else
                 qsButton.css( "position", "absolute" ).css( "float", "left" );
 
-            var img = $( this );
             //Determine if parent is a DIV or A, and use that to overlay popup button
             //Otherwise, create new DIV and wrap it around IMG
             // if ( $( this ).parent().is( "div" ) || $( this ).parent().is( "a" ) )
@@ -157,7 +156,7 @@ function Initialize()
                         {
                             // qsButton.show();
                             if ( drawBox )
-                                img.addClass( "gpOutline" );
+                                $( this ).addClass( "gpOutline" );
                             if ( hoverPos == 0 )
                                 qsButton.css( { top: event.clientY, left: event.clientX } ).show();
                             else
@@ -169,7 +168,7 @@ function Initialize()
                         if ( pluginEnabled )
                         {
                             qsButton.hide();
-                            img.removeClass( "gpOutline" );
+                            $( this ).removeClass( "gpOutline" );
                         }
                     } );
                 //wrap the newBox DIV around the image we're working on
@@ -189,14 +188,21 @@ function Initialize()
 
                     //pull the filename from the image's URL
                     var index = eventObject.data.url.lastIndexOf( "/" ) + 1;
-                    var fname = ( fileSavePath + ( fileSavePath.length == 0 ? "" : "\\" ) + eventObject.data.url.substr( index ) ).trim();
+                    var fname = ( fileSavePath + ( fileSavePath.length == 0 ? "" : "\\" ) + eventObject.data.url.substr( index ) ).trim().replace( /[^a-z0-9._-]/gi, '_' );
 
                     //fix imageURL to account for relative URLs
-                    var currentURL = window.location.href;
+                    // var currentURL = window.location.href;
+                    // console.log( "currentURL::" + currentURL );
                     var imageURL = eventObject.data.url;
+
                     //is this a relative or absolute URL
-                    if ( eventObject.data.url.trim().substr( 0, 7 ) != "http://" && eventObject.data.url.trim().substr( 0, 8 ) != "https://" )
-                        imageURL = currentURL + imageURL; //relative URL, so precede it by the current HTTP location
+                    // if ( eventObject.data.url.trim().substr( 0, 7 ) != "http://" && eventObject.data.url.trim().substr( 0, 8 ) != "https://" )
+                    // {
+                    //     //imageURL should never be relative, but just in case...
+                    //     imageURL = currentURL + imageURL; //relative URL, so precede it by the current HTTP location
+                    //     console.log( "RELATIVE::" + imageURL );
+                    // }
+                    // else
 
                     // console.log( "fileSavePath::" + fileSavePath );
                     // console.log( "FILENAME::" + fname );
